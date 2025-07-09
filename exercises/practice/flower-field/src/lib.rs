@@ -1,10 +1,10 @@
 fn get_local_char(garden: &[&str], i: usize, j: usize, vicinity: usize) -> char {
     let nb_rows = garden.len();
-    let nb_cols = garden.get(0).unwrap().len();
+    let nb_cols = garden.first().unwrap().len();
 
-    match (i.checked_sub(vicinity).unwrap_or(0) ..= i.checked_add(vicinity).unwrap().min(nb_rows-1))
+    match (i.saturating_sub(vicinity) ..= i.checked_add(vicinity).unwrap().min(nb_rows-1))
     .flat_map(|cline| 
-        (j.checked_sub(vicinity).unwrap_or(0)
+        (j.saturating_sub(vicinity)
         ..= 
         j.checked_add(vicinity).unwrap().min(nb_cols-1))
         .map(move |ccol| {
