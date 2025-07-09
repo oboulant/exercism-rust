@@ -49,6 +49,18 @@ fn handles_cramped_lists() {
 
 #[test]
 #[ignore]
+fn handles_cramped_lists_points() {
+    let input = "one.two.three";
+    let mut output = word_count(input);
+    let expected = [("one", 1), ("two", 1), ("three", 1)];
+    for (word, count) in expected {
+        assert_eq!((word, output.remove(word).unwrap_or(0)), (word, count));
+    }
+    assert_eq!(output.into_iter().collect::<Vec<_>>(), vec![]);
+}
+
+#[test]
+#[ignore]
 fn handles_expanded_lists() {
     let input = "one,\ntwo,\nthree";
     let mut output = word_count(input);
